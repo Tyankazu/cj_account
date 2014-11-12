@@ -17,11 +17,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/sign_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.39"
-            android:inputType="text"
+            android:inputType="text"          
             android:ems="10" >
 
             <requestFocus />
@@ -40,7 +40,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/sign_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,13 +55,13 @@
         android:layout_weight="0.09" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/login_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ログイン" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/make_account_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="アカウント作成" />
