@@ -16,10 +16,11 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/editText10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="text"
             android:ems="10" >
 
             <requestFocus />
@@ -70,10 +71,11 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editText11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="text"
             android:ems="10" />
     </LinearLayout>
 
@@ -89,10 +91,11 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/editText12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="text"
             android:ems="10" />
     </LinearLayout>
 
@@ -108,10 +111,11 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/editText13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="text"
             android:ems="10" />
     </LinearLayout>
 
@@ -123,9 +127,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/editText14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:ems="10" />
 
     <LinearLayout
