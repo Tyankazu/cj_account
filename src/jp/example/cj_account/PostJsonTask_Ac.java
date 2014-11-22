@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package jp.example.cj_account;
 
@@ -29,28 +29,29 @@ public class PostJsonTask_Ac extends AsyncTask<String, Integer, Integer> {
 	private String response;
 	private int statusCode;
     private Activity makeaccountActivity;
-    
+
     public PostJsonTask_Ac(Activity activity) {
 
         // 呼び出し元のアクティビティ
         this.makeaccountActivity = activity;
     }
-	
+
 	@Override
 	protected Integer doInBackground(String... contents) {
 		// TODO 自動生成されたメソッド・スタブ
-		
+		Log.d("PPPPP",contents.toString());
+
 		// 通信の際に送信するデータを付加
         // 今回の場合はIDとPass
         ArrayList <NameValuePair> params = new ArrayList <NameValuePair>();
-        //params.add( new BasicNameValuePair("jsonQuery", contents[0]));
-        params.add( new BasicNameValuePair("id", contents[0]));
-        params.add( new BasicNameValuePair("pass", contents[1]));
-        
+        params.add( new BasicNameValuePair("login", contents[0]));
+
+        Log.d("PARAMS",params.toString());
+
 		// 送信先URLを指定して通信を確立
-		String url="http://rhyth.dip.jp/user_regist.php";
+		String url="http://rhyth.dip.jp/login_json.php";
 		HttpPost httpPost = new HttpPost(url);
-		
+
 		// パラメータの設定
 					try {
 						httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
@@ -59,13 +60,12 @@ public class PostJsonTask_Ac extends AsyncTask<String, Integer, Integer> {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
 					DefaultHttpClient client = new DefaultHttpClient();
 					HttpResponse httpResponse = null;
-					
+
 					try {
 						 httpResponse = client.execute(httpPost);
-
+						 Log.d("httPostOk", httpPost.toString());
 						// ステータスコードを取得
 						statusCode = httpResponse.getStatusLine().getStatusCode();
 
@@ -78,19 +78,22 @@ public class PostJsonTask_Ac extends AsyncTask<String, Integer, Integer> {
 
 						// クライアントを終了させる
 						client.getConnectionManager().shutdown();
-						
+
 					} catch (ClientProtocolException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						Log.d("CPIE", "エラー");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						Log.d("IO", "エラー");
 					}
 					Log.d("RESPONSE", response);
 		            return statusCode;
 	}
-	
+
 	protected void onPostExecute(Integer result) {
+		Log.d("OK","result");
 		makeaccountActivity.finish();
 	}
 

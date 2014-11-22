@@ -44,7 +44,7 @@ public class MakeAccountActivity extends Activity {
 					String s2 = pass.getText().toString();
 					
 					HttpClient httpClient = new DefaultHttpClient();
-					HttpPost httpPost = new HttpPost("http://rhyth.dip.jp/user_regist.php");
+					HttpPost httpPost = new HttpPost("rhyth.dip.jp/login_json.php");
 					
 					JSONObject json = new JSONObject();
 					try {
@@ -65,7 +65,7 @@ public class MakeAccountActivity extends Activity {
 			                Toast.makeText(getBaseContext(), "登録しました", Toast.LENGTH_LONG).show();		                		           	                   	            
 	            }
 		        	            
-	        });
+	        });;
 	        
 	        Button back_btn = (Button)findViewById(R.id.backButton);
 	        back_btn.setOnClickListener(new OnClickListener() {
@@ -78,10 +78,7 @@ public class MakeAccountActivity extends Activity {
 			                	                		           	                   	            
 	            }
 		        	            
-	        });
-	        
-	        
-	     
+	        });	     
 	        }
 	 
 	 public boolean dispatchKeyEvent(KeyEvent event) {

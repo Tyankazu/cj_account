@@ -1,6 +1,5 @@
-/**
- * 
- */
+
+
 package jp.example.cj_account;
 
 import android.app.Activity;
