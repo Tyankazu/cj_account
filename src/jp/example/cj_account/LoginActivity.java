@@ -1,5 +1,8 @@
 package jp.example.cj_account;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.os.Build;
 
 public class LoginActivity extends ActionBarActivity {
@@ -27,6 +31,9 @@ public class LoginActivity extends ActionBarActivity {
 		Button button2 = (Button)findViewById(R.id.button2);
 		Button button1 = (Button)findViewById(R.id.button1);
 	        
+		final EditText name = (EditText) findViewById(R.id.editText1);
+		final EditText pass = (EditText) findViewById(R.id.editText2);	
+		
 	        button2.setOnClickListener(new OnClickListener() {
 	            public void onClick(View v) {
 	                // Sub 画面を起動
@@ -39,9 +46,19 @@ public class LoginActivity extends ActionBarActivity {
 	        button1.setOnClickListener(new OnClickListener() {
 	            public void onClick(View v) {
 	                // Sub 画面を起動
-	                Intent intent = new Intent(LoginActivity.this,
-	                		SubTopActivity.class);
-	                startActivity(intent);
+	            	
+					JSONObject json = new JSONObject();
+					try {
+						json.accumulate("name",name.getText());
+						json.accumulate("pass",pass.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					// サーバ通信
+	            	
+	            	new LoginAsyncTask(LoginActivity.this).execute(json.toString());
 	            }
 	        });
 	}
