@@ -11,61 +11,77 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 /**
  * @author b1012234
- *
+ * 
  */
 public class MakeAccountActivity extends Activity {
-	 public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.make_account);
-	        setTitle("アカウント作成画面");
-	        
-	        
-	        Button button3 = (Button)findViewById(R.id.button3);
-	        button3.setOnClickListener(new OnClickListener() {
-	            public void onClick(View v) {
-	                // Sub 画面を起動
-	                Intent intent = new Intent();
-	                intent.setClassName("jp.example.cj_account", "jp.example.cj_account.MakeProfileActivity");
-	                startActivity(intent);
-	                
-	                EditText et = (EditText)findViewById(R.id.editText1);
-	                EditText et2 = (EditText)findViewById(R.id.editText2);
-		            String s = et.getText().toString();
-		            String s2 = et2.getText().toString();
-		            try{
-		            OutputStream out = openFileOutput("a.txt",MODE_PRIVATE);
-		            PrintWriter writer = new PrintWriter(new OutputStreamWriter(out,"UTF-8"));
-		            writer.append(s);
-		            writer.close();
-		            }catch(IOException e){
-		            e.printStackTrace();
-		            }
-		            
-		            try{
-		            	InputStream in = openFileInput("a.txt");
-		            	BufferedReader reader = new BufferedReader(new InputStreamReader(in,"UTF-8"));
-			            EditText et3 = (EditText)findViewById(R.id.Test);
-		            	 while((s = reader.readLine())!= null){
-		            	 et3.append(s + s2);
-		            	 et3.append("\n");
-		            	 reader.close();
-		            	 }
-		            	}catch(IOException e){
-		            	 e.printStackTrace();
-		            	}
-	            }
-		        	            
-	        });
-	           
-	        }
+	Activity thisActivity;
+	
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		thisActivity = this;
+		
+		setContentView(R.layout.make_account);
+		setTitle("アカウント作成画面");
+
+		Button button3 = (Button) findViewById(R.id.button3);
+		button3.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+
+				EditText et = (EditText) findViewById(R.id.editText1);
+				EditText et2 = (EditText) findViewById(R.id.editText2);				
+				EditText et3 = (EditText) findViewById(R.id.editText3);
+				
+				Log.d("equals",""+et2.getText().toString().equals(et3.getText().toString()));
+
+				if(et2.getText().toString().equals(et3.getText().toString())) {
+					// JSON形式に変換して...
+					JSONObject json = new JSONObject();
+					try {
+						json.accumulate("name",et.getText());
+						json.accumulate("pass",et2.getText());
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					// サーバ通信
+					new MakeAccountAsyncTask(thisActivity).execute(json.toString());
+					
+				} else {
+					new AlertDialog.Builder(MakeAccountActivity.this)
+					.setTitle("えらー")
+					.setMessage("パスワードが一致しません")
+					.setCancelable(true)
+					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO 自動生成されたメソッド・スタブ
+							Log.d("AlertDialog", "Positive which :" + which);
+						}
+					})
+					.show();
+				}
+				
+			}
+
+		});
+
+	}
 }
